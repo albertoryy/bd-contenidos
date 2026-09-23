@@ -729,7 +729,10 @@ Escribe una consulta que calcule y devuelva una columna llamada `porcentaje_me_g
 
 Solución:
 ```sql
-
+select
+	round((me_gusta * 100.0) / reproducciones, 1) as porcentaje_me_gusta
+from cancion
+limit 10;
 ```
 
 | porcentaje_me_gusta |
@@ -796,6 +799,9 @@ Escribe una consulta que calcule y devuelva una columna llamada `que_donde` que 
 
 Solución:
 ```sql
+select distinct
+	(genero || ' ' || pais) as que_donde
+from cancion;
 
 ```
 
