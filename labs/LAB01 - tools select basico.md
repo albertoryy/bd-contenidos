@@ -264,7 +264,9 @@ Escribe una consulta SQL para seleccionar las columnas título (`titulo`) y repr
 
 Solución:
 ```sql
-
+select titulo, reproducciones
+from cancion_muestra
+order by reproducciones desc
 ```
 
 | titulo                | reproducciones |
@@ -408,7 +410,10 @@ Escribe una consulta para seleccionar las distintas combinaciones de país (`pai
 
 Solución:
 ```sql
-
+select distinct
+    pais,
+    genero
+from cancion;
 ```
 
 | pais           | genero |
@@ -463,7 +468,10 @@ Escribe una consulta para seleccionar las reproducciones (`reproducciones`) de l
 
 Solución:
 ```sql
-
+select
+   reproducciones
+from cancion
+where reproducciones < 1000000;
 ```
 
 | reproducciones |
@@ -486,7 +494,11 @@ Escribe otra consulta para seleccionar el género (`genero`) y el idioma (`idiom
 
 Solución:
 ```sql
-
+select distinct
+	genero,
+	idioma
+from cancion
+where reproducciones < 1000000;
 ```
 
 | genero | idioma |
@@ -556,6 +568,12 @@ Utiliza el operador not para seleccionar las canciones (solo las columnas `titul
 
 Solución:
 ```sql
+select distinct
+	titulo,
+	genero,
+	pais
+from cancion
+where genero != 'Rap';
 
 ```
 
@@ -597,7 +615,13 @@ El operador `OR` de SQL es un operador ‘o inclusivo’: se ejecuta correctamen
 
 Solución:
 ```sql
-
+select
+	titulo,
+	idioma,
+	pais
+from cancion
+where (idioma = 'ES' or pais = 'España')
+	and not (idioma = 'ES' and pais = 'España');
 ```
 
 | titulo           | idioma | pais           |
