@@ -21,7 +21,13 @@ Escribe una consulta que calcule y devuelva una columna llamada `que_donde` que 
 
 Solución:
 ```sql
-
+select
+	(Upper(genero) || ' ' || Lower(pais)) as que_donde,
+	round((me_gusta * 100.0) / reproducciones, 1) as porcentaje_me_gusta
+from cancion
+where (Idioma != 'ES')
+order by porcentaje_me_gusta desc
+limit 10;
 
 ```
 
@@ -167,7 +173,17 @@ Para emitir una canción en la radio hay que añadirle una cuña publicitaria. E
 
 Solución:
 ```sql
-
+select distinct
+    titulo,
+    pais,
+    duracion,
+	case
+		when (pais = "Reino Unido") then round(((duracion + 30) / 60.0), 2)
+		when (pais = "España") then round(((duracion + 45) / 60.0), 2) 
+	end as duracion_radio_min
+from cancion
+order by duracion desc
+limit 20;
 
 ```
 
@@ -371,7 +387,9 @@ Escribe una consulta para encontrar las canciones (`cancion`) cuya duración (`d
 
 Solución:
 ```sql
-
+select *
+from cancion
+where (duracion is not null) and (idioma is null)
 
 ```
 
@@ -471,7 +489,16 @@ Escribe una consulta que devuelva todas las columnas de las canciones y añada u
 
 Solución:
 ```sql
-
+select *,
+case
+	when duracion is not null then duracion
+	when reproducciones is not null then reproducciones
+	when me_gusta is not null then me_gusta
+	else -1
+end as primer_dato
+from cancion
+order by id_cancion desc
+limit 10
 
 ```
 
@@ -582,6 +609,9 @@ Escribe una consulta que cuente las canciones que **no** están en inglés, cont
 Solución:
 
 ```sql
+select count(*) as no_ingles
+from cancion
+where idioma != 'EN' or idioma is null
 ```
 
 Resultado:
@@ -693,7 +723,9 @@ Salida:
 
 Solución:
 ```sql
-
+select 
+	count(distinct anio) as anios_distintos
+from cancion
 
 ```
 
