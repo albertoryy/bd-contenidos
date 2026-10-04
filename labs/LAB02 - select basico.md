@@ -683,7 +683,10 @@ Salida:
 
 Solución:
 ```sql
-
+select
+    avg(reproducciones)
+from cancion
+where reproducciones > 1000000;
 
 ```
 
@@ -795,7 +798,11 @@ Escribe una consulta que muestre cada año de publicación (`anio`) distinto en 
 
 Solución:
 ```sql
-
+SELECT
+    count(*) filter (where duracion < 200) as corta,
+    count(*) filter (where duracion between 200 and 300) as media,
+    count(*) filter (where duracion > 300) as larga
+FROM cancion;
 
 ```
 
